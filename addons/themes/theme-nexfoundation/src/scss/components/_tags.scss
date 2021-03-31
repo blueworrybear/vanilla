@@ -46,6 +46,7 @@ ul.TagCloud li.TagCloud-Item {
 .TagCloud li:after {
     content: '|';
     margin-left: 1px;
+    color: #C4C4C4;
 }
 
 .TagCloud li:last-child:after {
