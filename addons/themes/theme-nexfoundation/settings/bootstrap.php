@@ -32,4 +32,13 @@ $container
     ->rule(TemplateLoader::class)
     ->setClass(TemplateLoader::class)
 ;
+$container
+    ->rule(TagsHelper::class)
+    ->setShared(true)
+;
+
+$container->get('Config')
+    ->set('Vanilla.Comments.AutoOffset', false)
+;
+
 ?>
