@@ -37,8 +37,9 @@ $container
     ->setShared(true)
 ;
 
-$container->get('Config')
-    ->set('Vanilla.Comments.AutoOffset', false)
-;
+$config = $container->get('Config');
+if ($config) {
+    $config->set('Vanilla.Comments.AutoOffset', false);
+}
 
 ?>
