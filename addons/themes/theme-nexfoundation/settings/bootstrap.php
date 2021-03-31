@@ -38,7 +38,7 @@ $container
 ;
 
 $config = $container->get('Config');
-if ($config) {
+if (!is_null($config)) {
     $config->set('Vanilla.Comments.AutoOffset', false);
 }
 
