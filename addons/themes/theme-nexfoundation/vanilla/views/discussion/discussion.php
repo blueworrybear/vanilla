@@ -84,6 +84,9 @@ $this->fireEvent('BeforeDiscussionDisplay');
                 </span>
                 <?php
                 Gdn::getContainer()->get(ArticleHelper::class)->writeUserAnchor($Author);
+                echo ' <div class="articleTime Mobile">';
+                echo anchor(Gdn_Format::toDate($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
+                echo '</div>';
                 ?>
                 <div class="Meta DiscussionMeta">
                 <!-- 原本文章的時間 -->

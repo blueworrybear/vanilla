@@ -44,12 +44,27 @@
     font-family: 'Noto Sans TC', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 17px;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 10px;
 }
 
 .articleTime > a {
     text-decoration:none !important;
+}
+
+.articleTime.Desktop {
+    display: none;
+    @include lg {
+        display: inline;
+    }
+}
+
+.articleTime.Mobile {
+    display: inline;
+    @include lg {
+        display: none;
+    }
 }
 
 .DiscussionHeader .AuthorWrap{
@@ -97,7 +112,9 @@
     }
     span.MItem.Author {
         margin-right: 0px;
-        margin-left: auto;
+        @include sm {
+            margin-left: auto;
+        }
         div.UserAnchor {
             display: flex;
             align-items: center;
