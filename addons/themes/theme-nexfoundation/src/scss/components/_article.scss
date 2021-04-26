@@ -62,8 +62,23 @@
 
 .articleTime.Mobile {
     display: inline;
+    padding-bottom: 5px;
     @include lg {
         display: none;
+    }
+}
+
+div.Frame-row {
+    padding: 0px;
+    @include md {
+        padding: 8px;
+    }
+}
+
+section.Content.MainContent {
+    padding: 0px;
+    @include md {
+        padding: 8px;
     }
 }
 
@@ -76,11 +91,26 @@
 .MessageList.Discussion {
     background: white;
     border-radius: 15px;
-    padding: 15px 45px 15px 45px;
+    padding: 15px;
+    @include md {
+        padding: 15px 45px 15px 45px;
+    }
 }
 
 // Discussion Bottom Header style
 .MessageList.Discussion {
+
+    .DiscussionHeader .Reactions {
+        width: auto;
+        height: auto;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 1px;
+        .Quote{
+            display: none;
+        }
+    }
 
     .Item-Header.DiscussionHeader {
         display: flex;
@@ -91,8 +121,18 @@
     span.MItem.MCount.CommentCount {
         display: flex;
         align-items: center;
+        margin-left: 0px;
         span {
-            margin-left: 5px;
+            margin-left: 4px;
+        }
+    }
+
+    .LineBreak {
+        width: 100%;
+        height: 5px;
+        @include md {
+            width: 0px;
+            height: 0px;
         }
     }
 
@@ -111,8 +151,8 @@
         }
     }
     span.MItem.Author {
-        margin-right: 0px;
-        @include sm {
+        @include md {
+            margin-right: 0px;
             margin-left: auto;
         }
         div.UserAnchor {
@@ -129,6 +169,13 @@
 
     .DiscussionMeta {
         display: none;
+    }
+}
+
+.MessageList.DataList.Comments {
+    display: inline;
+    @include md {
+        display: block;
     }
 }
 
@@ -194,4 +241,17 @@
             }
         }
     }
+}
+
+.ReactFacebook {
+    height: auto;
+    display: flex;
+}
+
+.ReactFacebook::before {
+    align-self: center;
+    content: '';
+    background: url('/addons/themes/theme-nexfoundation/assets/facebook.svg');
+    width: 22px;
+    height: 22px;
 }
