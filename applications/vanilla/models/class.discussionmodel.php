@@ -1242,6 +1242,8 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         $discussion->Url = discussionUrl($discussion);
         $discussion->CanonicalUrl = $discussion->Attributes['CanonicalUrl'] ?? $discussion->Url;
         $discussion->Tags = $this->formatTags($discussion->Tags);
+        // Prepare data attribute for frontend
+        $discussion->DataAttribute = $this->getDataAttribute($discussion);
 
         // Join in the category.
         $category = CategoryModel::categories($discussion->CategoryID);
@@ -1327,6 +1329,28 @@ class DiscussionModel extends Gdn_Model implements FormatFieldInterface, EventFr
         $discussion->pinLocation = $pinLocation;
         $this->EventArguments['Discussion'] = &$discussion;
         $this->fireEvent('SetCalculatedFields');
+    }
+
+    private function getDataAttribute($discussion) {
+        $bookmarkCount = $this->bookmarkCount($discussion->DiscussionID);
+        $tags = $this->tagModel->getDiscussionTags($discussion->DiscussionID, false);
+        $tags = array_map(function($value) {
+            return [
+                'name' => $value['FullName'],
+                'url' => tagUrl($value, '', '/'),
+            ];
+        }, $tags);
+        $data = [
+            'tags' => $tags,
+            'bookmarks' => $bookmarkCount
+        ];
+
+        $user = $this->userModel->getID($discussion->InsertUserID);
+        if ($user) {
+            $data['authorName'] = $user->Name;
+            $data['authorPhoto'] = $user->Photo;
+        }
+        return json_encode($data);
     }
 
     /**

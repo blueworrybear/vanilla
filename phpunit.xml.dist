@@ -38,6 +38,7 @@
         </testsuite>
         <testsuite name="Library">
             <directory suffix="Test.php">./tests/Library/</directory>
+            <exclude>./tests/Library/Vanilla/Formatting/DateTimeFormatterTest.php</exclude>
         </testsuite>
         <testsuite name="Formatting">
             <directory suffix="Test.php">./tests/Library/Vanilla/Formatting</directory>
@@ -57,6 +58,7 @@
             <directory suffix="Test.php">./tests/APIv2</directory>
             <directory suffix="Test.php">./applications/*/tests/APIv2</directory>
             <directory suffix="Test.php">./plugins/*/tests/APIv2</directory>
+            <exclude>./plugins/QnA/tests/APIv2/CommentsAnswerTest.php</exclude>
         </testsuite>
         <testsuite name="Storybook">
             <directory suffix="StorybookTest.php">./tests/</directory>

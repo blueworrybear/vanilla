@@ -1,0 +1,56 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Build and Push Docker Container
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./container/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/vanilla/container:latest
+
+      - name: Deploy to Dev Server
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: nexforum@${{ secrets.NEXFORUM_DEV_SERVER }}
+          privateKey: ${{ secrets.SSH_KEY_OF_NEXFORUM }}
+          command: |
+            echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            cd /home/nexforum/vanilla-project/vanilla
+            docker-compose down
+            docker-compose pull
+            docker-compose up -d
+            docker image prune -f

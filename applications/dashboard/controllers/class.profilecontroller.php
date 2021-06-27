@@ -1023,6 +1023,7 @@ class ProfileController extends Gdn_Controller {
                 $newAvatar = $this->saveAvatars($tmpAvatar, $thumbOptions, $upload);
             } else if ($avatar && $crop && $crop->isCropped()) {
                 // New thumbnail
+                $upload->Exception = null;
                 $tmpAvatar = $source;
                 $thumbOptions = ['Crop' => true,
                     'SourceX' => $crop->getCropXValue(),
@@ -1791,15 +1792,9 @@ EOT;
             $this->setData('Connections', []);
             $this->EventArguments['User'] = $this->User;
             $this->fireEvent('GetConnections');
-            if (count($this->data('Connections')) > 0) {
-                $module->addLink(
-                    'Options',
-                    sprite('SpConnection').' '.t('Connections'),
-                    '/profile/connections',
-                    'Garden.SignIn.Allow',
-                    ['class' => 'link-social link-connections']
-                );
-            }
+            // if (count($this->data('Connections')) > 0) {
+            //     $module->addLink('Options', sprite('SpConnection').' '.t('Social'), '/profile/connections', 'Garden.SignIn.Allow', ['class' => 'link-social']);
+            // }
         }
 
         $module->addLink('Options', t('Access Tokens'), '/profile/tokens', 'Garden.Tokens.Add', ['class' => 'link-tokens']);

@@ -1,0 +1,62 @@
+@import "./mixins";
+
+$signin-form-width: 300px;
+$signin-form-width-lg: 400px;
+$signin-item-margin: 20px;
+
+.NEXTheme.FormWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    min-width: $signin-form-width;
+    max-width: $signin-form-width;
+    @include lg {
+      min-width: $signin-form-width-lg;
+      max-width: $signin-form-width-lg;
+    }
+  }
+
+  .Methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Method{
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .Buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .MainForm {
+    width: 95%;
+
+    input {
+      max-width: $signin-form-width;
+      @include lg {
+        max-width: $signin-form-width-lg;
+      }
+      border-radius: 50px !important;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+    }
+
+    li {
+      margin-top: $signin-item-margin;
+      margin-bottom: $signin-item-margin;
+    }
+
+    .CheckBoxLabel, .ForgetPassword{
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

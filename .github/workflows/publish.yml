@@ -1,0 +1,70 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - "release/v*"
+
+jobs:
+  build:
+    name: Build and Push Docker Container
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Set Container Tag
+        run: |
+            echo "DOCKER_TAG=$(echo $GITHUB_REF | rev | cut -d '/' -f 1 | rev)" >> $GITHUB_ENV
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./container/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/vanilla/container:${{ env.DOCKER_TAG }}
+
+      - name: Build Docker-Composer
+        shell: bash
+        env:
+          DATABASE_HOST: ${{ secrets.NEXFORUM_DATABASE_HOST }}
+          DATABASE_NAME: ${{ secrets.NEXFORUM_DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.NEXFORUM_DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.NEXFORUM_DATABASE_PASSWORD }}
+          DOCKER_TAG: ${{ env.DOCKER_TAG }}
+          DOLLAR: '$'
+        run: |
+          sudo apt-get update && sudo apt-get -y install gettext-base
+          envsubst < container/docker-compose.yml > docker-compose.yml
+
+      - name: Deploy to Azure App Service
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.7.0
+          inlineScript: |
+            az webapp config container set \
+              --resource-group ${{ secrets.RESOURCE_GROUP }} \
+              --name vanilla-forum \
+              --multicontainer-config-type compose \
+              --multicontainer-config-file docker-compose.yml
+            az webapp restart \
+              --resource-group ${{ secrets.RESOURCE_GROUP }} \
+              --name vanilla-forum

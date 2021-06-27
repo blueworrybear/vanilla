@@ -3,6 +3,8 @@
 !/addons/themes/theme-foundation/
 !/addons/themes/theme-boilerplate/
 !/addons/themes/keystone/
+!/addons/themes/theme-nexfoundation/
+!/addons/addons/LikedPost
 /applications/*
 !/applications/conversations/
 !/applications/dashboard/
@@ -27,7 +29,7 @@
 !/conf/constants.php
 !/conf/readme.txt
 /dist/*
-/locales/*
+!/locales/*
 !/locales/.gitkeep
 /plugins/*
 !/plugins/AllViewed/
@@ -114,3 +116,4 @@ git-diff.txt
 phpcs-diff.json
 .phpunit.result.cache
 *.cookiejar
+coverage/

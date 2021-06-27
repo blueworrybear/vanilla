@@ -1,0 +1,154 @@
+// style for advertisement component
+
+$banner-width: 250px;
+
+#nex-advertisement {
+  min-width: $banner-width;
+  position: relative;
+  display: none;
+  visibility: hidden;
+  @include xl {
+    display: inline-block;
+    visibility: visible;
+  }
+
+
+  .hot-forum {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .hot-forum-root {
+    display: flex;
+    flex-wrap: wrap;
+    div:nth-child(1) {
+      background: #7BA4B8;
+    }
+    div:nth-child(2) {
+      background: #CBA59A;
+    }
+    div:nth-child(3) {
+      background: #A8A2AE;
+    }
+    div:nth-child(4) {
+      background: #A8DAB0;
+    }
+    div:nth-child(5) {
+      background: #DE9370;
+    }
+    div:nth-child(6) {
+      background: #9CA2B0;
+    }
+  }
+
+  .hot-forum-root_topic {
+    border-radius: 15px;
+    width: 105px;
+    height: 86px;
+    margin: 10px;
+    text-align: center;
+    line-height: 86px;
+    font-size: 18px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: #FFFFFF;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  img.banner {
+    min-width: $banner-width;
+  }
+  img.banner:hover {
+    cursor: pointer;
+  }
+}
+
+.Panel-main .BoxDiscussionFilter {
+  display: none;
+}
+
+.hot-forum-root {
+  display: flex;
+  flex-wrap: wrap;
+  div:nth-child(1n) {
+    background: #7BA4B8;
+  }
+  div:nth-child(2n) {
+    background: #CBA59A;
+  }
+  div:nth-child(3n) {
+    background: #A8A2AE;
+  }
+  div:nth-child(4n) {
+    background: #A8DAB0;
+  }
+  div:nth-child(5n) {
+    background: #DE9370;
+  }
+  div:nth-child(6n) {
+    background: #9CA2B0;
+  }
+}
+
+.hot-forum-root_topic {
+  border-radius: 15px;
+  width: 100px;
+  height: 86px;
+  margin: 10px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  a {
+    position: absolute;
+    top: 36%;
+    left: 31%;
+    font-size: 18px !important;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 86px;
+  }
+
+  a:hover {
+    color: white;
+  }
+}
+
+.hot-forum {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 24px !important;
+  line-height: 28px;
+  text-align: center;
+  color: #000000 !important;
+}
+
+.Panel-main .Box h4 {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.Panel-main .TagCloud .TagCloud-Item {
+  a {
+    color: #FF3559;
+    font-size: 14px;
+    display: inline-block;
+    padding-left: 5px;
+    border: none;
+  }
+}

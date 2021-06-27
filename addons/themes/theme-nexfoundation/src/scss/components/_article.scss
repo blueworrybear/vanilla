@@ -1,0 +1,257 @@
+@import "../mixins/mixins";
+
+//title
+.MessageList h1.articleTitle {
+    color: black ;
+    font-size: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 26px;
+}
+
+.MessageList .PageTitle {
+    margin-bottom: 30px;
+}
+
+.tagBorder{
+    display: flex ;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.articaleTags {
+    color: #FF3559 !important;
+    font-size: 14px !important;
+    display: inline-block !important;
+    margin-bottom: 20px !important;
+    font-family: 'Noto Sans TC', sans-serif !important;
+    font-style: normal !important;
+    font-weight: normal!important;
+    font-size: 14px!important;
+    line-height: 150%!important;
+    letter-spacing: 0.04em!important;
+}
+
+
+.articaleTags > a {
+
+    text-decoration:none !important;
+
+}
+
+.articleTime{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+.articleTime > a {
+    text-decoration:none !important;
+}
+
+.articleTime.Desktop {
+    display: none;
+    @include lg {
+        display: inline;
+    }
+}
+
+.articleTime.Mobile {
+    display: inline;
+    padding-bottom: 5px;
+    @include lg {
+        display: none;
+    }
+}
+
+div.Frame-row {
+    padding: 0px;
+    @include md {
+        padding: 8px;
+    }
+}
+
+section.Content.MainContent {
+    padding: 0px;
+    @include md {
+        padding: 8px;
+    }
+}
+
+.DiscussionHeader .AuthorWrap{
+    @include lg {
+      margin-left: 450px;
+    }
+}
+
+.MessageList.Discussion {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    @include md {
+        padding: 15px 45px 15px 45px;
+    }
+}
+
+// Discussion Bottom Header style
+.MessageList.Discussion {
+
+    .DiscussionHeader .Reactions {
+        width: auto;
+        height: auto;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 1px;
+        .Quote{
+            display: none;
+        }
+    }
+
+    .Item-Header.DiscussionHeader {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    span.MItem.MCount.CommentCount {
+        display: flex;
+        align-items: center;
+        margin-left: 0px;
+        span {
+            margin-left: 4px;
+        }
+    }
+
+    .LineBreak {
+        width: 100%;
+        height: 5px;
+        @include md {
+            width: 0px;
+            height: 0px;
+        }
+    }
+
+    span.MItem.ViewCount .BookmarkIconBox {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .BookmarkIcon {
+            fill: #FF3559;
+            stroke: #FF3559;
+            width: 14px;
+            height: 20px;
+        }
+        span {
+            margin-left: 5px;
+        }
+    }
+    span.MItem.Author {
+        @include md {
+            margin-right: 0px;
+            margin-left: auto;
+        }
+        div.UserAnchor {
+            display: flex;
+            align-items: center;
+        }
+        div.UserAnchor a {
+            margin-left: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+
+    .DiscussionMeta {
+        display: none;
+    }
+}
+
+.MessageList.DataList.Comments {
+    display: inline;
+    @include md {
+        display: block;
+    }
+}
+
+.Comment .Item-BodyWrap .Item-Header.CommentHeader {
+    padding: 0px;
+    padding-top: 0px;
+}
+
+.Comment {
+    @include md {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+    }
+}
+
+.Comment .CommentBody {
+    max-width: calc(100% - 50px);
+}
+
+.Comment .Item-Floor {
+    padding-top: 12px;
+    margin-right: 5px;
+    min-width: 60px;
+    color: #FF3559;
+}
+
+.Comment .Item-BodyWrap {
+    width: 100%;
+    .Message.userContent {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background: #EEEEEE;
+        min-height: 42px;
+        border-radius: 15px;
+        padding: 15px 25px 10px 25px;
+    }
+    .Options {
+        position: inherit !important;
+        margin-top: 0px !important;
+    }
+
+    @include md {
+        .Item-Footer {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+        .Item-Footer .Item-Header.CommentHeader {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 0px;
+            .Meta.CommentMeta.CommentInfo {
+                width: initial;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding: 0px;
+            }
+        }
+    }
+}
+
+.ReactFacebook {
+    height: auto;
+    display: flex;
+}
+
+.ReactFacebook::before {
+    align-self: center;
+    content: '';
+    background: url('/addons/themes/theme-nexfoundation/assets/facebook.svg');
+    width: 22px;
+    height: 22px;
+}

@@ -172,6 +172,13 @@ class TagModule extends AbstractWidgetModule {
         return 'Panel';
     }
 
+    public function getTags() {
+        if (!$this->_TagData) {
+            $this->getData();
+        }
+        return $this->_TagData->resultArray();
+    }
+
     /**
      * @return string
      */
